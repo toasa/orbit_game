@@ -29,19 +29,19 @@ impl Object {
 
 #[wasm_bindgen]
 pub fn update_position(obj1: &mut Object, obj2: &Object) {
-    const delta_time: f64 = 1.0;
+    const DELTA_TIME: f64 = 1.0;
 
-    let distance_x = obj1.x() - obj2.x();
-    let distance_y = obj1.y() - obj2.y();
-    let distance = (distance_x.powi(2) + distance_y.powi(2)).sqrt();
+    let dx = obj1.x() - obj2.x();
+    let dy = obj1.y() - obj2.y();
+    let distance = (dx.powi(2) + dy.powi(2)).sqrt();
     let force = (obj1.mass * obj2.mass) / distance.powi(2);
 
-    let acceleration_x = force * distance_x / distance / obj1.mass;
-    let acceleration_y = force * distance_y / distance / obj2.mass;
+    let acceleration_x = force * dx / distance / obj1.mass;
+    let acceleration_y = force * dy / distance / obj1.mass;
 
-    obj1.velocity.0 += acceleration_x * delta_time;
-    obj1.velocity.1 += acceleration_y * delta_time;
+    obj1.velocity.0 += acceleration_x * DELTA_TIME;
+    obj1.velocity.1 += acceleration_y * DELTA_TIME;
 
-    obj1.position.0 += obj1.velocity.0 * delta_time;
-    obj1.position.1 -= obj1.velocity.1 * delta_time;
+    obj1.position.0 += obj1.velocity.0 * DELTA_TIME;
+    obj1.position.1 -= obj1.velocity.1 * DELTA_TIME;
 }
