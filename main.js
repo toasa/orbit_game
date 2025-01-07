@@ -1,5 +1,5 @@
 
-import init, { Object } from './pkg/orbit_game.js';
+import init, { Object, update_position } from './pkg/orbit_game.js';
 
 async function run() {
     await init(); // WebAssemblyモジュールを初期化
@@ -25,7 +25,7 @@ async function run() {
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        rocket.update_position();
+        update_position(rocket, planet);
 
         requestAnimationFrame(animate);
     }
