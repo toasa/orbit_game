@@ -1,20 +1,33 @@
 
-import init, { draw_circle } from './pkg/orbit_game.js';
+import init, { Object } from './pkg/orbit_game.js';
 
 async function run() {
     await init(); // WebAssemblyモジュールを初期化
+
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    let x = 0;
+    const rocket = new Object(0, 300, 2, -10, 1000);
+
+    const star = new Object(700, 400, 0, 0, 1000);
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'blue';
 
-        draw_circle(ctx, x, 300, 50);
-        x += 2;
-        if (x > canvas.width) x = 0;
+        ctx.beginPath();
+        ctx.arc(star.x(), star.y(), 20, 0, Math.PI * 2);
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(rocket.x(), rocket.y(), 20, 0, Math.PI * 2);
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        rocket.update_position();
+
         requestAnimationFrame(animate);
     }
 
