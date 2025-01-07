@@ -7,15 +7,14 @@ async function run() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    const rocket = new Object(0, 300, 2, -10, 1000);
-
-    const star = new Object(700, 400, 0, 0, 1000);
+    const planet = new Object(700, 400, 0, 0, 1000);
+    const rocket = new Object(0, 300, 5, 0, 1000);
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         ctx.beginPath();
-        ctx.arc(star.x(), star.y(), 20, 0, Math.PI * 2);
+        ctx.arc(planet.x(), planet.y(), 20, 0, Math.PI * 2);
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2;
         ctx.stroke();
